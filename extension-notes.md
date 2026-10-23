@@ -1,0 +1,11 @@
+# Pocketly extension decisions
+
+Recurring transactions are application-owned local ledger automation. Due monthly schedules run on app open/resume and while the app is active, catch up missed months, and post once per schedule/month. A closed browser or suspended Expo app cannot execute local code; these do not make bank transfers or payments.
+
+Transactions preserve stored home-currency accounting amounts plus original amount/currency and the rate/date used. Existing version-1 USD data remains valid. Home-currency changes convert saved accounting amounts and budgets together with an explicit confirmation. New foreign transactions use the latest available official reference rate, not a claimed historical card settlement rate. Monthly recurring foreign transactions wait when no usable cached conversion exists. Public exchange-rate requests contain no financial records.
+
+Use Frankfurter v2 official ECB provider rates: https://api.frankfurter.dev/v2/providers/ecb/rates?base=EUR . Documentation: https://frankfurter.dev/ and https://frankfurter.dev/v1/ . V2 supports provider selection, daily rates, and caching. Only supported current ECB currencies are offered. The observed API schema is an array of date/base/quote/rate rows. Network failures retain the last valid locally cached snapshot and show its reference date.
+
+OCR uses Tesseract.js (https://github.com/naptha/tesseract.js), whose worker supports browser and Node recognition. Browser scanning runs on the device using downloadable worker/language files. Native Expo Go uses expo-image-picker (https://docs.expo.dev/versions/latest/sdk/imagepicker/) and sends only the explicitly selected image to the app server for temporary in-memory OCR. Native disclosure appears before Scan. No receipt images or recognized text are stored server-side. Expense review is mandatory; OCR is a suggestion and never creates a transaction automatically.
+
+Extend the existing app/(tabs) shell, modular components/budget, local BudgetProvider, and pure domain/CSV modules. Add currency and recurring domain helpers; receipt parser and platform image/OCR boundaries; recurring, currency settings, receipt scanner UI; temporary OCR server route. Keep app identifiers, launcher assets, fixed Metro8081/API3000, saved Expo credential privacy, and original design. No new cloud financial tables or login.
