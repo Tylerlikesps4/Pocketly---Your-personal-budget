@@ -43,3 +43,11 @@ Currency conversion uses cached ECB reference rates from Frankfurter. Existing t
 Browser receipt OCR runs locally with Tesseract.js, using downloaded engine/model assets. Native receipt scans send the selected image to `/api/receipts/ocr` for temporary, in-memory Tesseract processing. Review the extracted expense before saving. Receipt images and personal financial records are not included in this repository.
 
 CSV import/export is supported. Cloud sync, a full JSON backup button, and a Supabase migration flow have been discussed but are not implemented in this source snapshot.
+
+## License
+
+Licensed under the [MIT License](LICENSE).
+
+Copyright (c) 2026 Tylerlikesps4.
+
+Third-party dependencies and components retain their respective licenses and notices.
